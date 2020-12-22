@@ -4,7 +4,7 @@
 \alias{random_sq}
 \title{Generate random sequences}
 \usage{
-random_sq(n, len, alphabet, sd = NULL, use_gap = FALSE)
+random_sq(n, len, alphabet, sd = NULL, use_gap = FALSE, seed = NULL)
 }
 \arguments{
 \item{n}{[\code{integer(1)}]\cr
@@ -27,6 +27,10 @@ must be non-negative.}
 \item{use_gap}{[\code{logical(1)}]\cr
 If \code{TRUE}, sequences will be generated with random gaps inside
 (commonly denoted as "\code{-}").}
+
+\item{seed}{[\code{integer(1)}]\cr
+Passed to C++ to seed random letter generator. Default \code{NULL} value
+means no seeding done.}
 }
 \value{
 An object of class \code{sq} with type as specified.

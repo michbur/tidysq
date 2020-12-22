@@ -53,8 +53,8 @@ CPP_pack_STRING <- function(proto, alphabet, NA_letter, ignore_case) {
     .Call(`_tidysq_CPP_pack_STRING`, proto, alphabet, NA_letter, ignore_case)
 }
 
-CPP_random_sq <- function(n, len, alphabet, use_gap) {
-    .Call(`_tidysq_CPP_random_sq`, n, len, alphabet, use_gap)
+CPP_random_sq <- function(n, len, alphabet, use_gap, seed) {
+    .Call(`_tidysq_CPP_random_sq`, n, len, alphabet, use_gap, seed)
 }
 
 CPP_read_fasta <- function(file_name, alphabet, NA_letter, ignore_case) {

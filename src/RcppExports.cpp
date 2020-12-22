@@ -180,8 +180,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // CPP_random_sq
-Rcpp::List CPP_random_sq(const int& n, const Rcpp::IntegerVector& len, const Rcpp::StringVector& alphabet, const bool& use_gap);
-RcppExport SEXP _tidysq_CPP_random_sq(SEXP nSEXP, SEXP lenSEXP, SEXP alphabetSEXP, SEXP use_gapSEXP) {
+Rcpp::List CPP_random_sq(const int& n, const Rcpp::IntegerVector& len, const Rcpp::StringVector& alphabet, const bool& use_gap, const Rcpp::NumericVector& seed);
+RcppExport SEXP _tidysq_CPP_random_sq(SEXP nSEXP, SEXP lenSEXP, SEXP alphabetSEXP, SEXP use_gapSEXP, SEXP seedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -189,7 +189,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const Rcpp::IntegerVector& >::type len(lenSEXP);
     Rcpp::traits::input_parameter< const Rcpp::StringVector& >::type alphabet(alphabetSEXP);
     Rcpp::traits::input_parameter< const bool& >::type use_gap(use_gapSEXP);
-    rcpp_result_gen = Rcpp::wrap(CPP_random_sq(n, len, alphabet, use_gap));
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(CPP_random_sq(n, len, alphabet, use_gap, seed));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -378,7 +379,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_tidysq_CPP_pack_INTS", (DL_FUNC) &_tidysq_CPP_pack_INTS, 4},
     {"_tidysq_CPP_pack_STRINGS", (DL_FUNC) &_tidysq_CPP_pack_STRINGS, 4},
     {"_tidysq_CPP_pack_STRING", (DL_FUNC) &_tidysq_CPP_pack_STRING, 4},
-    {"_tidysq_CPP_random_sq", (DL_FUNC) &_tidysq_CPP_random_sq, 4},
+    {"_tidysq_CPP_random_sq", (DL_FUNC) &_tidysq_CPP_random_sq, 5},
     {"_tidysq_CPP_read_fasta", (DL_FUNC) &_tidysq_CPP_read_fasta, 4},
     {"_tidysq_CPP_sample_fasta", (DL_FUNC) &_tidysq_CPP_sample_fasta, 4},
     {"_tidysq_CPP_remove_NA", (DL_FUNC) &_tidysq_CPP_remove_NA, 3},

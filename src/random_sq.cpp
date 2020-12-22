@@ -10,8 +10,12 @@ using namespace tidysq;
 Rcpp::List CPP_random_sq(const int &n,
                          const Rcpp::IntegerVector &len,
                          const Rcpp::StringVector &alphabet,
-                         const bool &use_gap) {
-//    srand(seed);
+                         const bool &use_gap,
+                         const Rcpp::NumericVector &seed) {
+    unsigned int converted_seed = util::convert_seed(seed);
+    if (converted_seed != UINT32_MAX) {
+        srand(converted_seed);
+    }
     if (len.size() == 1) {
         return export_to_R(random_sq<RCPP_IT>(
                 n,

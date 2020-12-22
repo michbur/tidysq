@@ -17,6 +17,9 @@
 #' @param use_gap [\code{logical(1)}]\cr
 #'  If \code{TRUE}, sequences will be generated with random gaps inside
 #'  (commonly denoted as "\code{-}").
+#' @param seed [\code{integer(1)}]\cr
+#'  Passed to C++ to seed random letter generator. Default \code{NULL} value
+#'  means no seeding done.
 #'
 #' @return An object of class \code{sq} with type as specified.
 #'
@@ -42,9 +45,10 @@
 #'
 #' @family input_functions
 #' @export
-random_sq <- function(n, len, alphabet, sd = NULL, use_gap = FALSE) {
+random_sq <- function(n, len, alphabet, sd = NULL, use_gap = FALSE, seed = NULL) {
   assert_count(n)
   assert_count(len)
+  assert_count(seed, null.ok = TRUE)
   assert_character(alphabet, any.missing = FALSE, min.len = 0, unique = TRUE, null.ok = TRUE)
   assert_number(sd, null.ok = TRUE)
   assert_flag(use_gap)
@@ -64,6 +68,10 @@ random_sq <- function(n, len, alphabet, sd = NULL, use_gap = FALSE) {
     len <- round(rnorm(n, len, sd))
     len <- ifelse(len < 0, 0, len)
   }
+
+  if (is.null(seed)) {
+    seed <- Inf
+  }
   
-  CPP_random_sq(n, len, alphabet, use_gap)
+  CPP_random_sq(n, len, alphabet, use_gap, seed)
 }
